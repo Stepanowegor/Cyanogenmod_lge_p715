@@ -1,0 +1,5 @@
+#native code
+#dev_mount sdcard /mnt/sdcard auto /devices/platform/msm_sdcc.1/mmc_host /devices/platform/msm_sdcc.3/mmc_host
+# LGE_CHANGE_S [sunflwr.lee@lge.com] 20111208 : Change External SDCARD Path to /mnt/sdcard2
+#dev_mount sdcard2 /mnt/sdcard2 auto /devices/platform/msm_sdcc.1/mmc_host
+dev_mount external_sd /mnt/sdcard/external_sd auto /devices/platform/msm_sdcc.1/mmc_host

@@ -1,0 +1,17 @@
+
+########################################
+# CAPP_SECCLK
+########################################
+service lgsecclk /system/bin/lgsecclkserver
+    class main
+    user system
+    group system lgdrm_acc sdcard_rw media_rw
+
+
+########################################
+# CAPP_DRM
+########################################
+service lgdrm /system/bin/lgdrmserver
+    class main
+    user lgdrm
+    group lgdrm_acc sdcard_rw media_rw system radio qcom_oncrpc
