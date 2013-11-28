@@ -1,0 +1,56 @@
+########################################
+# CAPP_THREADPROFILER
+########################################
+service lgprofd /system/bin/lgprofd
+    socket lgprofd stream 666
+
+########################################
+# CAPP_UNINSTALL_PRELOADED
+########################################
+service post_install /system/vendor/bin/post_install.sh
+    disabled
+    oneshot
+
+on property:sys.boot_completed=1
+    start post_install
+
+########################################
+# CAPP_POWEROFF_ANI
+########################################
+service shutdownanim /system/bin/shutdownanimation
+    user graphics
+    group graphics system
+    disabled
+    oneshot
+
+########################################
+# CAPP_DRM
+########################################
+on post-fs-data
+    # create directory for lgdrm
+    mkdir /data/lgdrm 0770 lgdrm lgdrm_acc
+
+######################################
+# CAPP_BLUEERROR_HANDLER_REFACTORING
+######################################
+on post-fs-data
+    chown root system /data/dontpanic
+    chmod 0775 /data/dontpanic
+
+########################################
+# CAPP_FONTS
+########################################
+# CAPP_FONTS_HYFONT_0.9.0.2 [dongseok.lee@lge.com 20120206] support chnging fonts
+on post-fs-data
+    mkdir /data/font 777 root root
+    chmod 777 /data/font
+    mkdir /data/font/config 777 root root
+    chmod 777 /data/font/config
+    mkdir /data/font/download 777 root root
+    chmod 777 /data/font/download
+# CAPP_FONTS_HYFONT_0.9.0.2_END
+
+#CAPP_RESERVED_USERDATA
+on property:ro.reserve.blockcount=*
+    exec /system/bin/tune2fs -r $ro.reserve.blockcount \
+        -u system $ro.reserve.device

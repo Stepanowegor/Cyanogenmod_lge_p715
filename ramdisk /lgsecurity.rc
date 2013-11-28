@@ -1,0 +1,5 @@
+
+on security-init
+    wait /dev/block/mmcblk0p6
+    chown root radio /dev/block/mmcblk0p6
+    chmod 0770 /dev/block/mmcblk0p6
